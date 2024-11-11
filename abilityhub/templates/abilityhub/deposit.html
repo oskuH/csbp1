@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deposit | Abilityhub</title>
+  <link rel="stylesheet" href="{% static 'abilityhub/css/styles.css' %}">
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  {% if form.errors %}
+    <div>
+      <ul class="messages">
+        {% for field, errors in form.errors.items %}
+          {% for error in errors %}
+            <li class="error">{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form action="{% url 'abilityhub:deposit' %}" method="post" novalidate>
+    {% csrf_token %}
+    <fieldset>
+      <legend>Deposit credits</legend>
+
+      <div class="form-field">
+        <label for="id_added_credits">How many credits would you like to add?</label>
+        {{ form.added_credits }}
+      </div>
+  
+      <div class="form-field">
+        <label for="id_payment_method">Payment method:</label>
+        {{ form.payment_method }}
+      </div>
+    </fieldset>
+    <input type="submit" value="Deposit">
+  </form>
+  
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+
+</body>
+</html>

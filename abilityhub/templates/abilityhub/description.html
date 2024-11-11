@@ -1,0 +1,21 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit description | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <form action="{% url 'abilityhub:description' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+  </form>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+  
+</body>
+</html>

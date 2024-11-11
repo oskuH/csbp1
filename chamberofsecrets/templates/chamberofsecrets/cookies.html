@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stolen cookies</title>
+  </head>
+  <body>
+    <ul>
+      {% for cookies in cookies %}
+        <li>{{ cookies.timestamp }}: {{ cookies.cookies }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

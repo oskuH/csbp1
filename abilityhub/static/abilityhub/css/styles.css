@@ -1,0 +1,23 @@
+.messages, .message {
+  list-style-type: none;
+  padding: 0;
+}
+.messages li, .message {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.messages .error, .message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.form-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.form-field label {
+  width: 150px;
+  margin-right: 10px;
+  text-align: right;
+}

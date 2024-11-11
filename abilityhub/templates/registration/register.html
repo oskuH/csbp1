@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register | Abilityhub</title>
+  <link rel="stylesheet" href="{% static 'abilityhub/css/styles.css' %}">
+</head>
+<body>
+  {% if form.errors %}
+    <ul class="messages">
+      {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+          <li class="error">{{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <form action="{% url 'abilityhub:register' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Register</legend>
+
+      <div class="form-field">
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+      </div>
+
+      <div class="form-field">
+        <label for="id_first_name">First Name:</label>
+        {{ form.first_name }}
+      </div>
+
+      <div class="form-field">
+        <label for="id_last_name">Last Name:</label>
+        {{ form.last_name }}
+      </div>
+
+      <div class="form-field">
+        <label for="id_password">Password:</label>
+        {{ form.password }}
+      </div>
+
+      <div class="form-field">
+        <label for="id_password_confirm">Confirm Password:</label>
+        {{ form.password_confirm }}
+      </div>
+    </fieldset>
+    <input type="submit" value="Register">
+  </form>
+
+  <ul>
+    {% for help_text in password_help_texts %}
+      <li>{{ help_text }}</li>
+    {% endfor %}
+  </ul>
+
+  <p><a href="{% url 'abilityhub:login' %}">Log in instead</a></p>
+
+</body>
+</html>

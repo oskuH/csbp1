@@ -1,0 +1,66 @@
+<style>
+  .navbar {
+    padding-bottom: 10px;
+  }
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+  } 
+  .navbar li {
+    padding: 0;
+  }
+  .navbar li.text {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 16px;
+    text-decoration: none;
+  }
+  .navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navbar li button {
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 16px 16px;
+    text-decoration: none;
+  }
+  .navbar li a:hover {
+    background-color: #111;
+  }
+  .navbar li a.no-hover:hover {
+    background-color: inherit;
+  }
+  .navbar li button:hover {
+    background-color: #111;
+  }
+</style>
+
+<nav class="navbar">
+  <ul>
+    <li><a class="no-hover" style="color:yellow;font-size: large;" href="{% url 'abilityhub:home' %}">ABILITYHUB</a></li>
+    <li><a href="{% url 'abilityhub:home' %}">Home</a></li>
+    <li><a href="{% url 'abilityhub:myprofile' auth_person.id %}">My Profile</a></li>
+    <!-- <li><a href="{% url 'abilityhub:profile' auth_person.id %}">My Profile</a></li> -->
+    <li><a href="{% url 'abilityhub:messages' %}">Messages</a></li>
+    <li><a href="{% url 'abilityhub:transactions' %}">Transactions</a></li>
+    <li style="color:yellow;text-align:center;padding: 14px 16px;">{{ auth_person.credits }} C</li>
+    <li><a href="{% url 'abilityhub:deposit' %}">Deposit</a></li>
+    <li class="text" style="margin-left: auto;color:white;font-style:italic;font-size:small;">Logged in as {{ auth_person }}</li>
+    <li>
+      <form method="post" action="{% url 'abilityhub:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Log out</button>     
+      </form>
+    </li>
+  </ul>
+</nav>

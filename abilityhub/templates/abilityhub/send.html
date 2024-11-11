@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+
+<html>
+<head>
+  <title>Send credits | Abilityhub</title>
+  <link rel="stylesheet" href="{% static 'abilityhub/css/styles.css' %}">
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <div>
+    <h3>Sending credits to {{ person }}</h3>
+    <form action="{% url 'abilityhub:send' person.id %}" method="post" novalidate>
+      <input type="hidden" name="from" value="{{ auth_person.pk }}">
+      <label for="credits">Credits:</label>
+      <input type="text" id="credits" name="credits">
+      
+      <!-- {% csrf_token %}
+      {% if form.errors %}
+      <div>
+        <ul class="messages">
+          {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+              <li class="error">{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <h3>Sending credits to {{ person }}</h3>
+
+      </div>
+        <label for="id_sent_credits">Credits:</label>
+        {{ form.sent_credits }}
+      </div> -->
+      
+      <input type="submit" value="Send">
+    </form>
+  </div>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+
+</body>
+</html>

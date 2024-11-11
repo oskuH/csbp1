@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messages | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <div>
+    <ul style="list-style-type: none;">
+      {% for chat in chats %}
+        {% for participant in chat.participants.all %}
+          {% if participant != auth_person %}
+            <li><a href="{% url 'abilityhub:chat' chat.id %}">{{ participant }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div>
+    {% if selected_chat %}
+      {% for participant in selected_chat.participants.all %}
+        {% if participant != auth_person %}
+          <h2>Chatting with <a href="{% url 'abilityhub:profile' participant.id %}">{{ participant }}</a></h2>
+        {% endif %}
+      {% endfor %}
+      <table>
+        {% for message in messages %}
+          <tr>
+            <td><div>{{ message.sender }}</div><div>{{ message.timestamp }}</div></td>
+            <td>{{ message.content|safe }}</td> <!-- |safe facilitates Injection -->
+          </tr>
+        {% endfor %}
+        <form action="{% url 'abilityhub:chat' selected_chat.id %}" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" value="Send">
+        </form>
+      </table>
+    {% else %}
+      <p>Select a chat to view messages or start a new one via the recipient's profile.</p>
+    {% endif %}
+  </div>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+  
+</body>
+</html>

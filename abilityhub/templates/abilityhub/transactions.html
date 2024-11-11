@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<style>
+  td {
+    text-align: center;
+  }
+</style>
+<html>
+<head>
+  <title>Transactions | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>time</th>
+        <th>from</th>
+        <th>to</th>
+        <th>amount</th>
+        <th>balance after</th>
+      </tr>
+      {% for transaction in transactions %}
+        <tr key="{{ transaction.timestamp }}">
+          <td>{{ transaction.timestamp }}</td>
+          {% if transaction.type == 'transaction' %}
+            <td><a href="{% url 'abilityhub:profile' transaction.sender.id %}">{{ transaction.sender }}</a></td>
+            <td><a href="{% url 'abilityhub:profile' transaction.receiver.id %}">{{ transaction.receiver }}</a></td>
+            <td>{{ transaction.sent_credits }}</td>
+            {% if transaction.sender == auth_person %}
+              <td>{{ transaction.sender_credits_after }}</td>
+            {% endif %}
+            {% if transaction.receiver == auth_person %}
+              <td>{{ transaction.receiver_credits_after }}</td>
+            {% endif %}
+          {% elif transaction.type == 'deposit' %}
+            <td colspan="2" style="background-color: aqua;">Deposit</td>
+            <td>{{ transaction.added_credits }}</td>
+            <td>{{ transaction.depositor_credits_after }}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+  
+</body>
+</html>

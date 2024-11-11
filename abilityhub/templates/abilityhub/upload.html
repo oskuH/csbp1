@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Image | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <div>
+    <form action="{% url 'abilityhub:upload' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Upload">
+    </form>
+  </div>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+  
+</body>
+</html>

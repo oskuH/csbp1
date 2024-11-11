@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<style>
+  .image-container {
+    width: 33.33%;
+    box-sizing: border-box;
+    margin: 5px;
+    position: relative;
+  }
+  .image-container img {
+    width: 100%;
+  }
+  .options-box { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    background: rgba(0, 0, 0, 0.7); 
+    color: white; 
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  .options-box a {
+    display: block;
+    margin: 5px 0;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  .privacy-status {
+    display: block; 
+    position: absolute; 
+    bottom: 4px;
+    left: 0; 
+    background: #d6d300; 
+    color: rgb(0, 0, 0); 
+    padding: 10px;
+    box-sizing: border-box;
+  }
+</style>
+<head>
+  <title>{{ person }} | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  <h1>
+    {{ person }}
+    <a href="{% url 'abilityhub:send' person.id %}">Send credits</a>
+    <a href="{% url 'abilityhub:openchat' person.id %}">Chat</a>
+  </h1>
+
+  <h3>Description</h3>
+  <p>{{ person.description|safe }}</p> <!-- CSRF -->
+
+  <h3>Images</h3>
+  <div style="display: flex; flex-wrap: wrap;">
+    {% for image in person.images.all %}
+      {% if not image.is_private %}
+        <div class="image-container">
+          <img src="{{ image.image.url }}" />
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+  
+</body>
+</html>

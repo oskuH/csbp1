@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login | Abilityhub</title>
+  <link rel="stylesheet" href="{% static 'abilityhub/css/styles.css' %}">
+</head>
+<body>
+  {% if form.errors %}
+    <p class="message error">Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+      {% if user.is_authenticated %}
+        <p class="message error">
+          Your account doesn't have access to this page. To proceed, please login with an account that has access.
+        </p>
+      {% else %}
+        <p class="message error">Please log in to see this page.</p>
+      {% endif %}
+  {% endif %}
+
+  <form method="post" action="{% url 'abilityhub:login' %}">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Login</legend>
+      
+      <table>
+        <tr>
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password.label_tag }}</td>
+          <td>{{ form.password }}</td>
+        </tr>
+      </table>
+    </fieldset>
+    <input type="submit" value="Login">
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
+
+  <p><a href="">Reset password</a> (not implemented)</p>
+  <p><a href="{% url 'abilityhub:register' %}">Create account</a></p>
+  
+</body>
+</html>

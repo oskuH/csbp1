@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+  
+  <form method="post">
+    {% csrf_token %}
+    <label for="person-select">View someone's profile</label>
+      {% if other_people %}
+        <select name="person_id" id="person-select" required="true">
+          <option value="">--Please select a person--</option>
+          {% for person in other_people %}
+            <option value="{{ person.id }}">{{ person }}</li>
+          {% endfor %}
+        </select>
+      {% endif %}
+    <button type="submit">Select Person</button>
+  </form>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Credits sent | Abilityhub</title>
+</head>
+<body>
+
+  <div id="navbar-placeholder"></div>
+
+  {% if sent_credits != 1 %}
+    <h3>{{ sent_credits }} credits successfully sent to {{ receiver }}!</h3>
+  {% else %}
+    <h3>{{ sent_credits }} credit successfully sent to {{ receiver }}!</h3>
+  {% endif %}
+  
+  <p>What would you like to do next?</p>
+  <p>
+    <a href="{% url 'abilityhub:openchat' receiver.id %}">Open your chat with {{ receiver }}</a>
+    <a href="{% url 'abilityhub:profile' receiver.id %}">Visit the profile of {{ receiver }}</a>
+  </p>
+
+  <script src="{% static 'abilityhub/js/navbar.js' %}"></script>
+
+</body>
+</html>
