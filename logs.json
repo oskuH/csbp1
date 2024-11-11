@@ -1,2 +1,0 @@
-Form error in added_credits: You must deposit at least 1 credit.
-{"asctime": "2024-10-23T07:13:35.660076+00:00", "interaction_id": "d345eeb6-01d0-4a56-88fc-db5eaf981b1e", "application": "abilityhub", "code_location": "DepositView", "user": "admin", "event_type": "validation_error", "levelname": "WARNING", "description": "Form error in added_credits: You must deposit at least 1 credit."}
