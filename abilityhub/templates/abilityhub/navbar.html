@@ -50,7 +50,6 @@
     <li><a class="no-hover" style="color:yellow;font-size: large;" href="{% url 'abilityhub:home' %}">ABILITYHUB</a></li>
     <li><a href="{% url 'abilityhub:home' %}">Home</a></li>
     <li><a href="{% url 'abilityhub:myprofile' auth_person.id %}">My Profile</a></li>
-    <!-- <li><a href="{% url 'abilityhub:profile' auth_person.id %}">My Profile</a></li> -->
     <li><a href="{% url 'abilityhub:messages' %}">Messages</a></li>
     <li><a href="{% url 'abilityhub:transactions' %}">Transactions</a></li>
     <li style="color:yellow;text-align:center;padding: 14px 16px;">{{ auth_person.credits }} C</li>
